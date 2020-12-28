@@ -1,0 +1,24 @@
+{
+  "name": "nodeblog",
+  "version": "1.0.0",
+  "description": "基于node.js - fastify 编写的blog service",
+  "main": "startup.js",
+  "dependencies": {
+    "fastify": "^3.9.2",
+    "fastify-plugin": "^3.0.0",
+    "nodemon": "^2.0.6",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon ./startup.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog",
+    "fastity",
+    "node.js"
+  ],
+  "author": "zhuxin",
+  "license": "ISC"
+}
