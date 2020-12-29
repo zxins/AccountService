@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const {newDB} = require('../../plugins/sequelize-db-connector');
+// const {newDB} = require('../../plugins/sequelize-db-connector');
 
 const BlogUserTableName = 'blog_user';
 const BlogUserAttributes = {
@@ -75,8 +75,8 @@ function initBlogUserModel(sequelize){
     });
 }
 
-const blogUserModel = initBlogUserModel(newDB());
-blogUserModel.sync();
+// const blogUserModel = initBlogUserModel(newDB());
+// blogUserModel.sync();
 
 
 module.exports = {

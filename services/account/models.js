@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const {newDB} = require('../../plugins/sequelize-db-connector');
+// const {newDB} = require('../../plugins/sequelize-db-connector');
 
 const AccountTableName = "account";
 const AccountAttributes = {
@@ -106,8 +106,8 @@ function initAccountModel(sequelize) {
 }
 
 // 执行同步表结构
-const accountModel = initAccountModel(newDB())
-accountModel.sync()
+// const accountModel = initAccountModel(newDB())
+// accountModel.sync()
 
 const AccountPlatformTableName = "account_platform";
 const AccountPlatformAttributes = {
@@ -196,8 +196,8 @@ function initAccountPlatformModel(sequelize) {
 }
 
 // 同步第三方登录表
-const platformModel = initAccountPlatformModel(newDB());
-platformModel.sync()
+// const platformModel = initAccountPlatformModel(newDB());
+// platformModel.sync()
 
 module.exports = {
     AccountTableName,

@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const {newDB} = require('../../plugins/sequelize-db-connector');
+// const {newDB} = require('../../plugins/sequelize-db-connector');
 
 // 后台系统
 const AuthSystemTableName = 'auth_system';
@@ -83,8 +83,8 @@ function initAuthSystemModel(sequelize) {
     })
 }
 
-const authSystemModel = initAuthSystemModel(newDB());
-authSystemModel.sync()
+// const authSystemModel = initAuthSystemModel(newDB());
+// authSystemModel.sync()
 
 
 // 后台系统菜单
@@ -195,8 +195,8 @@ function initAuthSystemMenuModel(sequelize) {
     })
 }
 
-const authSystemMenuModel = initAuthSystemMenuModel(newDB());
-authSystemMenuModel.sync()
+// const authSystemMenuModel = initAuthSystemMenuModel(newDB());
+// authSystemMenuModel.sync()
 
 
 // 后台系统权限
