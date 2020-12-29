@@ -5,7 +5,7 @@ const AccountTableName = "account_user";
 const AccountAttributes = {
     email: {
         type: Sequelize.DataTypes.STRING(30),
-        allowNull: false
+        allowNull: false,
     },
     phone: {
         type: Sequelize.DataTypes.STRING(15),
