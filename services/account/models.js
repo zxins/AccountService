@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const {newDB} = require('../../plugins/sequelize-db-connector');
 
-const AccountTableName = "account_user";
+const AccountTableName = "account";
 const AccountAttributes = {
     email: {
         type: Sequelize.DataTypes.STRING(30),
@@ -41,7 +41,7 @@ const AccountAttributes = {
     }
 }
 
-function initAccountUserModel(sequelize) {
+function initAccountModel(sequelize) {
     return sequelize.define(AccountTableName, AccountAttributes, {
         freezeTableName: true,
         timestamps: false,
@@ -77,7 +77,7 @@ function initAccountUserModel(sequelize) {
 }
 
 // 执行同步表结构
-const accountModel = initAccountUserModel(newDB())
+const accountModel = initAccountModel(newDB())
 accountModel.sync()
 
 const AccountPlatformTableName = "account_platform";
@@ -157,7 +157,7 @@ platformModel.sync()
 module.exports = {
     AccountTableName,
     AccountAttributes,
-    initAccountUserModel,
+    initAccountModel,
     AccountPlatformTableName,
     AccountPlatformAttributes,
     initAccountPlatformModel,

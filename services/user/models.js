@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const {newDB} = require('../../plugins/sequelize-db-connector');
 
-const BlogMemberTableName = 'blog_member';
-const BlogMemberAttributes = {
+const BlogUserTableName = 'blog_user';
+const BlogUserAttributes = {
     uid: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false
@@ -33,8 +33,8 @@ const BlogMemberAttributes = {
     }
 }
 
-function initBlogMemberModel(sequelize){
-    return sequelize.define(BlogMemberTableName, BlogMemberAttributes, {
+function initBlogUserModel(sequelize){
+    return sequelize.define(BlogUserTableName, BlogUserAttributes, {
         freezeTableName: true,
         timestamps: false,
         getterMethods: {
@@ -61,12 +61,12 @@ function initBlogMemberModel(sequelize){
     });
 }
 
-const blogMemberModel = initBlogMemberModel(newDB());
-blogMemberModel.sync();
+const blogUserModel = initBlogUserModel(newDB());
+blogUserModel.sync();
 
 
 module.exports = {
-    BlogMemberTableName,
-    BlogMemberAttributes,
-    initBlogMemberModel
+    BlogUserTableName,
+    BlogUserAttributes,
+    initBlogUserModel
 }
