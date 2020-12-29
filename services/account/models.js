@@ -6,38 +6,62 @@ const AccountAttributes = {
     email: {
         type: Sequelize.DataTypes.STRING(30),
         allowNull: false,
+        comment: '邮箱',
+        defaultValue: '',
     },
     phone: {
         type: Sequelize.DataTypes.STRING(15),
-        allowNull: true
+        allowNull: false,
+        comment: '手机号',
+        defaultValue: '',
     },
     username: {
         type: Sequelize.DataTypes.STRING(30),
-        allowNull: false
+        allowNull: false,
+        comment: '用户名',
+        defaultValue: '',
     },
     password: {
         type: Sequelize.DataTypes.STRING(32),
-        allowNull: false
+        allowNull: false,
+        comment: '密码',
+        defaultValue: ''
     },
     createAt: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
+        comment: '创建时间',
+        defaultValue: 0
     },
     createIpAt: {
         type: Sequelize.DataTypes.STRING(12),
-        allowNull: false
+        allowNull: false,
+        comment: '创建IP',
+        defaultValue: '',
     },
     lastLoginAt: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        comment: '最后登录时间',
+        defaultValue: 0
     },
     lastLoginIpAt: {
         type: Sequelize.DataTypes.STRING(12),
-        allowNull: false
+        allowNull: false,
+        comment: '最后登录IP',
+        defaultValue: ''
     },
     loginTimes: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        comment: '登录次数',
+        defaultValue: 0
+    },
+    status: {
+        type: Sequelize.DataTypes.TINYINT,
+        allowNull: false,
+        comment: '状态',
+        defaultValue: '',   //  1:enable, 0:disable, -1:deleted',
     }
 }
 
@@ -68,6 +92,11 @@ function initAccountModel(sequelize) {
                 fields: ['email']
             },
             {
+                name: 'idx_phone',
+                unique: true,
+                fields: ['phone']
+            },
+            {
                 name: 'idx_username',
                 unique: true,
                 fields: ['username']
@@ -84,35 +113,51 @@ const AccountPlatformTableName = "account_platform";
 const AccountPlatformAttributes = {
     uid: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        comment: '账号id',
+        defaultValue: 0
     },
     platformToken: {
         type: Sequelize.DataTypes.STRING(60),
-        allowNull: false
+        allowNull: false,
+        comment: '平台access_token',
+        defaultValue: ''
     },
     platformId: {
         type: Sequelize.DataTypes.STRING(60),
         allowNull: false,
+        comment: '平台id',
+        defaultValue: ''
     },
     type: {
         type: Sequelize.DataTypes.TINYINT,
-        allowNull: false
+        allowNull: false,
+        comment: '平台类型',    // 0:未知, 1:wechat, 2:qq, 3:weibo ...
+        defaultValue: 0
     },
     nickname: {
         type: Sequelize.DataTypes.STRING(60),
-        allowNull: true
+        allowNull: false,
+        comment: '昵称',
+        defaultValue: ''
     },
     avatar: {
         type: Sequelize.DataTypes.STRING(255),
-        allowNull: true
+        allowNull: false,
+        comment: '头像',
+        defaultValue: ''
     },
     createAt: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        comment: '创建时间',
+        defaultValue: 0
     },
     updateAt: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        comment: '更新时间',
+        defaultValue: 0
     }
 }
 
@@ -134,7 +179,7 @@ function initAccountPlatformModel(sequelize) {
                 }
             }
         },
-        comment: '第三方用户登录表',
+        comment: '第三方用户信息表',
         indexes:[
             {
                 name: 'idx_uid',

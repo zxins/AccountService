@@ -5,31 +5,45 @@ const BlogUserTableName = 'blog_user';
 const BlogUserAttributes = {
     uid: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        comment: '账号id',
+        defaultValue: 0
     },
     nickname: {
         type: Sequelize.DataTypes.STRING(30),
         allowNull: false,
+        comment: '昵称',
+        defaultValue: ''
     },
     avatar: {
         type: Sequelize.DataTypes.STRING(255),
-        allowNull: true
+        allowNull: false,
+        comment: '头像(相对路径)',
+        defaultValue: ''
     },
     gender: {
-        type: Sequelize.DataTypes.ENUM('male', 'female'),
-        defaultValue: 'male'
+        type: Sequelize.DataTypes.ENUM('male', 'female', 'unknown'),
+        allowNull: false,
+        comment: '性别',
+        defaultValue: 'unknown'
     },
     role: {
         type: Sequelize.DataTypes.TINYINT,
         allowNull: false,
+        comment: '角色',
+        defaultValue: 0     // 0:普通用户, 1:VIP
     },
     createAt: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        comment: '创建时间',
+        defaultValue: 0
     },
     updateAt: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        comment: '更新时间',
+        defaultValue: 0
     }
 }
 
