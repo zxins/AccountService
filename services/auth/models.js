@@ -61,6 +61,7 @@ function initAuthSystemModel(sequelize) {
         getterMethods: {
             detailInfo() {
                 return {
+                    _id: this.id,
                     name: this.name,
                     desc: this.desc,
                     domain: this.domain,
@@ -165,6 +166,7 @@ function initAuthSystemMenuModel(sequelize) {
         getterMethods: {
             detailInfo() {
                 return {
+                    _id: this.id,
                     systemId: this.systemId,
                     parentId: this.parentId,
                     name: this.name,
@@ -200,6 +202,232 @@ function initAuthSystemMenuModel(sequelize) {
 
 
 // 后台系统权限
+const AuthItemTableName = 'auth_item';
+const AuthItemAttributes = {
+    systemId: {
+        type: Sequelize.DataTypes.SMALLINT,
+        allowNull: false,
+        comment: '系统id',
+        defaultValue: 0
+    },
+    menuId: {
+        type: Sequelize.DataTypes.SMALLINT,
+        allowNull: false,
+        comment: '菜单id',
+        defaultValue: 0
+    },
+    status: {
+        type: Sequelize.DataTypes.TINYINT,
+        allowNull: false,
+        comment: '状态',
+        defaultValue: 0     // 1:enable, 0:disable, -1:deleted'
+    },
+    createAt: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '创建时间',
+        defaultValue: 0
+    },
+    createBy: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '创建人staff_id',
+        defaultValue: 0
+    },
+    updateAt: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '更新时间',
+        defaultValue: 0
+    },
+    updateBy: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '修改人staff_id',
+        defaultValue: 0
+    },
+}
+
+function initAuthItemModel(sequelize) {
+    return sequelize.define(AuthItemTableName, AuthItemAttributes, {
+        freezeTableName: true,
+        timestamps: false,
+        getterMethods: {
+            detailInfo() {
+                return {
+                    _id: this.id,
+                    systemId: this.systemId,
+                    menuId: this.systemId,
+                    status: this.status,
+                    createAt: this.createAt,
+                    createBy: this.createBy,
+                    updateAt: this.updateAt,
+                    updateBy: this.updateBy,
+                }
+            }
+
+        },
+        comment: '系统权限',
+        indexes: [
+            {
+                name: 'idx_system_menu',
+                unique: true,
+                fields: ['systemId', 'menuId']
+            }
+        ]
+    })
+}
+
+
+// 角色
+const AuthRoleTableName = 'auth_role';
+const AuthRoleAttributes = {
+    name: {
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: false,
+        comment: '角色名称',
+        defaultValue: ''
+    },
+    desc: {
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: false,
+        comment: '角色描述',
+        defaultValue: ''
+    },
+    authItemSet: {
+        type: Sequelize.DataTypes.TEXT,
+        comment: '权限集合,多个值用逗号(,)隔开',
+    },
+    status: {
+        type: Sequelize.DataTypes.TINYINT,
+        allowNull: false,
+        comment: '状态',
+        defaultValue: 0     // 1:enable, 0:disable, -1:deleted'
+    },
+    createAt: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '创建时间',
+        defaultValue: 0
+    },
+    createBy: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '创建人staff_id',
+        defaultValue: 0
+    },
+    updateAt: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '更新时间',
+        defaultValue: 0
+    },
+    updateBy: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '修改人staff_id',
+        defaultValue: 0
+    },
+}
+
+function initAuthRoleModel(sequelize) {
+    return sequelize.define(AuthRoleTableName, AuthRoleAttributes, {
+        freezeTableName: true,
+        timestamps: false,
+        getterMethods: {
+            detailInfo() {
+                return {
+                    _id: this.id,
+                    name: this.name,
+                    desc: this.desc,
+                    authItemSet: this.authItemSet,
+                    status: this.status,
+                    createAt: this.createAt,
+                    createBy: this.createBy,
+                    updateAt: this.updateAt,
+                    updateBy: this.updateBy,
+                }
+            },
+        },
+        comment: '员工角色'
+    });
+}
+
+
+// 角色与员工
+const AuthRoleStaffTableName = 'auth_role_staff';
+const AuthRoleStaffAttributes = {
+    staffId: {
+        type: Sequelize.DataTypes.SMALLINT,
+        allowNull: false,
+        comment: '员工id',
+        defaultValue: 0
+    },
+    roleSet: {
+        type: Sequelize.DataTypes.SMALLINT,
+        comment: '角色集合, 多个值用逗号(,)隔开',
+    },
+    status: {
+        type: Sequelize.DataTypes.TINYINT,
+        allowNull: false,
+        comment: '状态',
+        defaultValue: 0     // 1:enable, 0:disable, -1:deleted'
+    },
+    createAt: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '创建时间',
+        defaultValue: 0
+    },
+    createBy: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '创建人staff_id',
+        defaultValue: 0
+    },
+    updateAt: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '更新时间',
+        defaultValue: 0
+    },
+    updateBy: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        comment: '修改人staff_id',
+        defaultValue: 0
+    },
+}
+
+function initAuthRoleStaffModel(sequelize) {
+    return sequelize.define(AuthRoleStaffTableName, AuthRoleStaffAttributes, {
+        freezeTableName: true,
+        timestamps: false,
+        getterMethods: {
+            detailInfo() {
+                return {
+                    _id: this.id,
+                    staffId: this.staffId,
+                    roleSet: this.roleSet,
+                    status: this.status,
+                    createAt: this.createAt,
+                    createBy: this.createBy,
+                    updateAt: this.updateAt,
+                    updateBy: this.updateBy,
+                }
+            },
+        },
+        comment: '权限角色与员工关系',
+        indexes: [
+            {
+                name: 'idx_staffId',
+                unique: true,
+                fields: ['staffId']
+            }
+        ]
+    });
+}
+
 
 module.exports = {
     AuthSystemTableName,
@@ -207,5 +435,14 @@ module.exports = {
     initAuthSystemModel,
     AuthSystemMenuTableName,
     AuthSystemMenuAttributes,
-    initAuthSystemMenuModel
+    initAuthSystemMenuModel,
+    AuthItemTableName,
+    AuthItemAttributes,
+    initAuthItemModel,
+    AuthRoleTableName,
+    AuthRoleAttributes,
+    initAuthRoleModel,
+    AuthRoleStaffTableName,
+    AuthRoleStaffAttributes,
+    initAuthRoleStaffModel,
 }

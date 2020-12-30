@@ -54,6 +54,7 @@ function initBlogUserModel(sequelize){
         getterMethods: {
             detailInfo(){
                 return {
+                    _id: this.id,
                     uid: this.uid,
                     nickname: this.nickname,
                     avatar: this.avatar,

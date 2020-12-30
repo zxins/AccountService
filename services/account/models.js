@@ -72,6 +72,7 @@ function initAccountModel(sequelize) {
         getterMethods: {
             detailInfo() {
                 return {
+                    _id: this.id,
                     email: this.email,
                     phone: this.phone,
                     username: this.username,
@@ -168,6 +169,7 @@ function initAccountPlatformModel(sequelize) {
         getterMethods: {
             detailInfo() {
                 return {
+                    _id: this.id,
                     uid: this.uid,
                     platformToken: this.platformToken,
                     platformId: this.platformId,

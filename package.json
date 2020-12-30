@@ -6,6 +6,7 @@
   "dependencies": {
     "fastify": "^3.9.2",
     "fastify-plugin": "^3.0.0",
+    "moment": "^2.29.1",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.6",
     "sequelize": "^6.3.5"
@@ -13,6 +14,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "nodemon ./startup.js",
+    "sync": "node ./commands/dbsync.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
