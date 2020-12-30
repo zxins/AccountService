@@ -33,6 +33,12 @@ const BlogUserAttributes = {
         comment: '角色',
         defaultValue: 0     // 0:普通用户, 1:VIP
     },
+    status: {
+        type: Sequelize.DataTypes.TINYINT,
+        allowNull: false,
+        comment: '状态',
+        defaultValue: 0,   //  1:enable, 0:disable, -1:deleted',
+    },
     createAt: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
@@ -69,7 +75,6 @@ function initBlogUserModel(sequelize){
         indexes: [
             {
                 name: 'idx_uid',
-                unique: true,
                 fields: ['uid']
             }
         ]

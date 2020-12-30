@@ -77,7 +77,6 @@ function initAuthSystemModel(sequelize) {
         indexes: [
             {
                 name: 'idx_domain',
-                unique: true,
                 fields: ['domain']
             }
         ]
@@ -185,12 +184,10 @@ function initAuthSystemMenuModel(sequelize) {
         indexes: [
             {
                 name: 'idx_systemId',
-                unique: true,
                 fields: ['systemId']
             },
             {
                 name: 'idx_parentId',
-                unique: true,
                 fields: ['parentId']
             },
         ]
@@ -271,7 +268,6 @@ function initAuthItemModel(sequelize) {
         indexes: [
             {
                 name: 'idx_system_menu',
-                unique: true,
                 fields: ['systemId', 'menuId']
             }
         ]
@@ -421,7 +417,6 @@ function initAuthRoleStaffModel(sequelize) {
         indexes: [
             {
                 name: 'idx_staffId',
-                unique: true,
                 fields: ['staffId']
             }
         ]

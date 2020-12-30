@@ -81,17 +81,14 @@ function initStaffInfoModel(sequelize) {
         indexes: [
             {
                 name: 'idx_uid',
-                unique: true,
                 fields: ['uid']
             },
             {
                 name: 'idx_email',
-                unique: true,
                 fields: ['email']
             },
             {
                 name: 'idx_phone',
-                unique: true,
                 fields: ['phone']
             },
         ]

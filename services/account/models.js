@@ -61,7 +61,7 @@ const AccountAttributes = {
         type: Sequelize.DataTypes.TINYINT,
         allowNull: false,
         comment: '状态',
-        defaultValue: '',   //  1:enable, 0:disable, -1:deleted',
+        defaultValue: 0,   //  1:enable, 0:disable, -1:deleted',
     }
 }
 
@@ -89,17 +89,14 @@ function initAccountModel(sequelize) {
         indexes: [
             {
                 name: 'idx_email',
-                unique: true,
                 fields: ['email']
             },
             {
                 name: 'idx_phone',
-                unique: true,
                 fields: ['phone']
             },
             {
                 name: 'idx_username',
-                unique: true,
                 fields: ['username']
             }
         ]
@@ -185,12 +182,10 @@ function initAccountPlatformModel(sequelize) {
         indexes:[
             {
                 name: 'idx_uid',
-                unique: true,
                 fields:['uid']
             },
             {
                 name: 'idx_platformId',
-                unique: true,
                 fields: ['platformId']
             }
         ]
