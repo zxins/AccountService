@@ -1,12 +1,11 @@
-const {newDB} = require('../../plugins/sequelize-db-connector');
+const {BaseCtrl} = require('../../lib/controller');
+const {getDatetime} = require('../../lib/utils');
 const {AccountCtrl} = require('../account/controllers');
 const {initBlogUserModel} = require('./models');
-const moment = require('moment');
 
-class UserCtrl {
+class UserCtrl extends BaseCtrl {
     constructor(db) {
-        this.db = db;
-        this.model = initBlogUserModel(this.db);
+        super(db, initBlogUserModel);
         this.accountCtrl = new AccountCtrl(this.db);
     }
 
@@ -19,9 +18,9 @@ class UserCtrl {
                     username: registerInfo.username,
                     password: registerInfo.password,
                     status: 1,
-                    createAt: moment().clone().unix(),
+                    createAt: getDatetime().unix(),
                     createIpAt: registerInfo.ip,
-                    lastLoginAt: moment().clone().unix(),
+                    lastLoginAt: getDatetime().unix(),
                     lastLoginIpAt: registerInfo.ip,
                 }
                 const account = await this.accountCtrl.createOne(createAccountInfo, t);
@@ -32,8 +31,8 @@ class UserCtrl {
                     avatar: registerInfo.avatar,
                     gender: registerInfo.gender,
                     status: 1,
-                    createAt: moment().clone().unix(),
-                    updateAt: moment().clone().unix(),
+                    createAt: getDatetime().unix(),
+                    updateAt: getDatetime().unix(),
                 }
                 const user = await this.createOne(createUserInfo, t);
                 return user
@@ -45,20 +44,11 @@ class UserCtrl {
     }
 
     async createOne(createInfo, t) {
-        let model;
-        await this.model.create(createInfo, {transaction: t}).then(result => {
-            model = result;
-        })
-        return model.detailInfo;
+        const user = await this._create(createInfo, t);
+        return user.detailInfo;
     }
 }
 
-const userCtrl = new UserCtrl(newDB())
-userCtrl.register({
-    email: 'local@localhost.com',
-    username: 'zhangsan',
-    password: '123456',
-    ip: '127.0.0.1'
-}).then(data => {
-    console.log(data)
-})
+module.exports = {
+    UserCtrl
+}

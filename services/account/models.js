@@ -78,10 +78,11 @@ function initAccountModel(sequelize) {
                     username: this.username,
                     password: this.password,
                     createAt: this.createAt,
-                    createIpAt: this.createAt,
+                    createIpAt: this.createIpAt,
                     lastLoginAt: this.lastLoginAt,
                     lastLoginIpAt: this.lastLoginIpAt,
-                    loginTimes: this.loginTimes
+                    loginTimes: this.loginTimes,
+                    status: this.status,
                 }
             },
         },
