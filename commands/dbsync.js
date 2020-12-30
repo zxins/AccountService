@@ -13,7 +13,7 @@ const {
 } = require('../services/auth/models');
 
 const {initStaffInfoModel} = require('../services/staff/models');
-const {initBlogUserModel} = require('../services/user/models');
+const {initBlogUserModel} = require('../example/user/models');
 
 // 创建db
 const sequelize = newDB();
